@@ -11,6 +11,9 @@ class Rocket extends Phaser.GameObjects.Sprite {
     }
 
     update() {
+        if(Phaser.Input.Keyboard.JustDown(keyF)){
+            console.log("shot");
+        }
         // left/right movement
         if(!this.isFiring) {
             if(keyLEFT.isDown && this.x >= borderUISize + this.width) {
@@ -30,15 +33,16 @@ class Rocket extends Phaser.GameObjects.Sprite {
         }
         // reset on miss
         if(this.y <= borderUISize * 3 + borderPadding) {
-            this.reset();
+            this.isFiring = false;
+            this.y = game.config.height - borderUISize - borderPadding;
         }
     }
 
-    // reset rocket to "ground"
     reset() {
         this.isFiring = false;
         this.y = game.config.height - borderUISize - borderPadding;
     }
+
 
 
 }
